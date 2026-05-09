@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:match*",
-      "destination": "https://lost-and-found-orcin.vercel.app/"
+      "destination": "https://lost-and-found-orcin.vercel.app/api/:match*"
     },
     {
       "source": "/(.*)",
