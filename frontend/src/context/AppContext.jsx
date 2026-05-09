@@ -208,8 +208,22 @@ export const AppProvider = ({ children }) => {
     // Placeholder
   };
 
-  const deleteUser = (id) => {
-    // Placeholder
+  const deleteUser = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this user? This action cannot be undone.')) return;
+    try {
+      const res = await fetch(`/api/auth/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        fetchUsers();
+      } else {
+        const errData = await res.json();
+        alert(errData.error || 'Failed to delete user');
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
