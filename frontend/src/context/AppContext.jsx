@@ -176,13 +176,14 @@ export const AppProvider = ({ children }) => {
 
   const updateClaimStatus = async (id, status) => {
     try {
+      const dbStatus = status.toUpperCase();
       const res = await fetch(`/api/claims/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ status })
+        body: JSON.stringify({ status: dbStatus })
       });
       if (res.ok) {
         fetchClaims();
